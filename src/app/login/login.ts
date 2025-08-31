@@ -8,6 +8,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
+import { Shared } from "../shared";
 
 @Component({
   selector: "app-login",
@@ -16,7 +17,11 @@ import { Router } from "@angular/router";
   styleUrl: "./login.scss",
 })
 export class Login {
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private auth: Shared
+  ) {}
   ngOnInit() {
     this.registerForm.reset({
       phone: "",
@@ -37,17 +42,24 @@ export class Login {
       this.http
         .post("https://localhost:7097/api/Managment/signin", data)
         .subscribe({
-          next: (res) => console.log("Success", res),
-          error: (err) => console.error("Error", err),
+          next: (res: any) => {
+            console.log("Success", res);
+
+            // Save the response to the service
+            this.auth.setUserData(res);
+
+            localStorage.setItem("token", res.model.token);
+            localStorage.setItem("user", JSON.stringify(res.model.phone));
+
+            // Navigate after successful login
+            this.router.navigate(["getProduct"]);
+            this.registerForm.reset();
+          },
+          error: (err) => {
+            console.error("Error", err);
+            alert("Login failed: " + err.message);
+          },
         });
-
-      // Save to localStorage
-      localStorage.setItem("username", phone || "");
-      localStorage.setItem("password", password || "");
-
-      console.log("Saved to localStorage:", phone, password);
-      this.router.navigate(["getProduct"]);
-      this.registerForm.reset();
     } else {
       this.registerForm.markAllAsTouched();
       return;
