@@ -1,0 +1,23 @@
+<main class="main" (submit)="onSubmitForm()">
+  <form [formGroup]="registerForm" autocomplete="off">
+    <label for="phone">phone</label>
+    <input formControlName="phone" id="phone" type="text">
+
+    @if (registerForm.controls.phone.hasError('required') && (registerForm.controls.phone.dirty ||
+    registerForm.controls.phone.touched)) {
+    <div class="warning">
+      This field is required.
+    </div>
+    }
+
+    <label for="password">password</label>
+    <input formControlName="password" id="password" type="password">
+    @if (registerForm.controls.password.hasError('required') && (registerForm.controls.password.dirty ||
+    registerForm.controls.password.touched)) {
+    <div class="warning">
+      This field is required.
+    </div>
+    }
+    <button type="submit">click me</button>
+  </form>
+</main>
