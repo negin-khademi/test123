@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
+import { DecimalPipe } from "@angular/common";
 
 @Component({
-  selector: 'app-product-item',
-  imports: [],
-  templateUrl: './product-item.html',
-  styleUrl: './product-item.scss'
+  selector: "app-product-item",
+  imports: [DecimalPipe],
+  templateUrl: "./product-item.html",
+  styleUrl: "./product-item.scss",
 })
-export class ProductItem {
-
-}
+export class ProductItem {}
