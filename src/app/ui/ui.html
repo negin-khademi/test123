@@ -70,14 +70,14 @@
 
         <button class="w-full flex justify-between items-center py-3 px-4 hover:bg-gray-100"
           (click)="section.open = !section.open">
-          <span class="hover:text-lime-500 font-bold leading-10 block">{{ section.title }}</span>
+          <span class="hover:text-lime-500 font-bold">{{ section.title }}</span>
           <!-- Show + or - -->
           <span class="text-xl font-bold hover:text-lime-500">
             {{ section.open ? '−' : '+' }}
           </span>
         </button>
         @if (section.open) {
-        <p class="px-4 text-gray-600 text-sm">{{section.content}}</p>
+        <p class="px-4 text-gray-600 text-sm leading-7 ">{{section.content}}</p>
         <hr class="text-gray-300 mt-4">
         }
       </div>
