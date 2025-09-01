@@ -1,6 +1,5 @@
 <div class="bg-grays pt-4 md:pt-8">
   <div class="lg:w-[80%] md:mx-auto grid grid-cols-1 p-5 bg-grays" dir="rtl">
-
     <div class="md:flex">
       <div class="lg:w-1/2 md:h-80">
         <img src="images/package.png" alt="product" class=" w-full h-full object-cover rounded-lg">
@@ -66,6 +65,26 @@
       <app-product-item />
     </div>
     <div>1</div>
-    <div>1</div>
+    <div class="mb-20">1</div>
+    <!-- show cort just in mobile mode -->
+    <div class="fixed bottom-0 w-full  py-4 z-10 bg-white md:hidden ">
+      <div class="grid grid-cols-2  ">
+        <div class="flex  items-center">
+          <button class="bg-green-700 text-white rounded-lg py-3 px-2 text-sm">افزودن به سبد خرید</button>
+        </div>
+        <div class="grid grid-cols-1 ">
+          <div class="flex justify-center">
+            <div>
+              <div>
+                <span class="bg-rose-500 p-2 text-white rounded-lg">20%</span>
+                <span class="line-through text-sm ml-2">{{3935000 | number}}</span>
+              </div>
+              <span class="mt-2">{{3000000 | number}} تومان</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
