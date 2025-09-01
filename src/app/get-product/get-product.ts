@@ -1,11 +1,12 @@
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+
 import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Shared } from "../shared";
 
 @Component({
   selector: "app-get-product",
-  imports: [],
+  imports: [HttpClientModule],
   templateUrl: "./get-product.html",
   styleUrl: "./get-product.scss",
 })
