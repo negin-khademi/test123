@@ -1,91 +1,179 @@
 <div class="bg-grays pt-4 md:pt-8">
-  <div class="lg:w-[80%] md:mx-auto grid grid-cols-1 p-5 bg-grays" dir="rtl">
-    <div class="md:flex">
-      <div class="lg:w-1/2 md:h-80">
-        <img src="images/package.png" alt="product" class=" w-full h-full object-cover rounded-lg">
+  <div
+    class="2xl:w-[70%] xl:w-[80%] lg:w-[90%] md:mx-auto grid grid-cols-1 p-5 bg-grays lg:gap-8 gap-6 mb-8"
+    dir="rtl"
+  >
+    <div class="lg:flex lg:gap-8">
+      <div class="lg:w-1/2 md:h-[340px]">
+        <img
+          src="images/package.png"
+          alt="product"
+          class="w-full h-full object-cover rounded-lg"
+        />
       </div>
       <!-- products features -->
       <div
-        class="lg:w-1/2 border border-solid border-gray-300 rounded-lg w-full md:border-none mt-4 md:mt-0 md:mr-3 md:pr-0">
-        <h2 class="font-bold text-base md:text-lg mt-3 md:mt-0 pr-4">پکیج 5 عددی روتین پوست چرب و مختلط</h2>
-        <hr class="text-gray-300 w-full mt-2">
-        <h3 class="font-semibold text-gray-800 pr-4 mt-2 mb-1">ویژگی های محصول :</h3>
-        <ul class="text-gray-600 text-sm px-4 leading-7 md:list-disc md:mr-4">
+        class="lg:w-1/2 flex flex-col border border-solid border-gray-300 rounded-lg w-full lg:border-none mt-4 lg:mt-0 lg:mr-3 lg:pr-0"
+      >
+        <h2
+          class="font-bold text-base xl:text-xl mt-3 md:mt-0 pr-4 py-2 lg:py-0"
+        >
+          پکیج 5 عددی روتین پوست چرب و مختلط
+        </h2>
+        <hr class="text-gray-300 w-full mt-2" />
+        <h3 class="font-semibold text-gray-800 pr-4 mt-2 mb-1">
+          ویژگی های محصول :
+        </h3>
+        <ul class="text-gray-600 text-sm px-4 leading-7 lg:list-disc lg:mr-4">
           <li>
-            ترکیبی هدفمند از کرم نرم کننده و آبرسان 10% اوره اورلین و کرم دست و پای جی
+            ترکیبی هدفمند از کرم نرم کننده و آبرسان 10% اوره اورلین و کرم دست و
+            پای جی
           </li>
-          <li>
-            اثر بخشی در ترمیم و بهبود ترک های پاشنه پا
-          </li>
-          <li>
-            لایه برداری قوی سلول های مرده و کاهش ضخامت پوست
-          </li>
+          <li>اثر بخشی در ترمیم و بهبود ترک های پاشنه پا</li>
+          <li>لایه برداری قوی سلول های مرده و کاهش ضخامت پوست</li>
           <li>
             ایجاد لیک لایه محافظ برای جلوگیری از دست رفتن رطوبت و آسیب بیشتر
           </li>
         </ul>
         <!-- brands -->
-        <div class="pr-4 text-xs flex mt-2 mb-2">
-          <span class="ml-2 ">برندها:</span>
-          <p class="text-lime-500 ">فولیکا(Fulica)،درمالوگ (Dermalog)،فاربن (Farben)</p>
+        <div class="pr-4 text-xs lg:text-base flex mt-4 mb-2">
+          <span class="ml-2">برندها:</span>
+          <p class="text-lime-500">
+            فولیکا(Fulica)،درمالوگ (Dermalog)،فاربن (Farben)
+          </p>
         </div>
+
         <!-- price and corts -->
-        <div class="hidden md:grid md:grid-cols-3 md:mt-8 md:px-4 md:gap-2 ">
-          <div class="flex items-center">
-            <button class="bg-green-700 text-white rounded-lg py-2 md:py-4 px-4">افزودن به سبد خرید</button>
-          </div>
-          <div class="grid grid-cols-1 ">
-            <div class="flex justify-center">
-              <div>
-                <div>
-                  <span class="bg-rose-500 p-2 text-white rounded-lg">20%</span>
-                  <span class="line-through text-sm ml-2">{{3935000 | number}}</span>
-                </div>
-                <span class="mt-2">{{3000000 | number}} تومان</span>
-              </div>
+        <div
+          class="actions hidden items-center justify-between mt-auto lg:flex"
+        >
+          @if(!notInCart()){
+          <button appButton (click)="onAddProductToCart()">
+            افزودن به سبد خرید
+          </button>
+          } @else {
+          <div class="flex flex-col relative">
+            <div
+              class="form-group relative py-4 px-2 rounded-xl bg-white border border-solid border-gray-100 shadow-md w-36"
+            >
+              <i
+                class="absolute cursor-pointer left-2 top-1/2 text-gray-500 -translate-y-1/2"
+                (click)="onMinusBtnClicked()"
+                [ngClass]="{
+                  'icon-minus': remainingStock() !== 0,
+                  'icon-trash': remainingStock() === productQuantity
+                }"
+              ></i>
+              <form [formGroup]="form">
+                <input
+                  class="text-center border-none outline-none w-full"
+                  formControlName="shoppingCardInput"
+                />
+              </form>
+              <i
+                class="icon-plus absolute cursor-pointer right-2 top-1/2 text-gray-500 -translate-y-1/2"
+                (click)="onPlusBtnClicked()"
+              ></i>
             </div>
+
+            @if(maxStockReached()){
+            <span class="text-red-500 text-xs absolute -bottom-8 w-max"
+              >تعداد بیش از حد مجاز امکان پذیر نیست</span
+            >
+
+            }
           </div>
-          <div class="flex items-center ">
-            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-              <!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-              <path
-                d="M64 80c-8.8 0-16 7.2-16 16l0 320c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-320c0-8.8-7.2-16-16-16L64 80zM0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM308.4 204.7l-80 128c-4.2 6.7-11.4 10.9-19.3 11.3s-15.5-3.2-20.2-9.6l-48-64c-8-10.6-5.8-25.6 4.8-33.6s25.6-5.8 33.6 4.8l27 36 61.4-98.3c7-11.2 21.8-14.7 33.1-7.6s14.7 21.8 7.6 33.1z" />
-            </svg>
-            <span class="text-sm">باقی مانده:</span>
-            <span class="font-semibold text-sm">10عدد</span>
+          }
+
+          <div class="price flex flex-col">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="line-through text-md text-gray-500">۳,۹۳۵,۰۰۰</span>
+              <span class="bg-red-600 text-white py-1 px-3 rounded-xl text-sm"
+                >۲۰٪</span
+              >
+            </div>
+            <span class="text-gray-500 font-bold text-lg">۳,۰۰۰,۰۰۰ تومان</span>
+          </div>
+
+          <div class="quantity flex items-center gap-2">
+            <div class="flex gap-1 items-center">
+              <i class="icon-warehouse text-green-500 text-md"></i>
+              <span class="text-sm text-gray-500"> باقی مانده: </span>
+            </div>
+            <span>{{ productQuantity }} عدد</span>
           </div>
         </div>
-
       </div>
     </div>
-    <div class="md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:py-4 gap-6 ">
+    <div
+      class="md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:py-4 gap-6"
+    >
       <app-product-item />
       <app-product-item />
       <app-product-item />
       <app-product-item />
     </div>
-    <app-accardion [accData]="sections" />
 
+    <div class="lg:hidden">
+      <app-accardion [accData]="sections" />
+    </div>
 
-    <!-- show cort just in mobile mode -->
-    <div class="fixed bottom-0 w-full py-4 z-10 bg-white md:hidden ">
-      <div class="grid grid-cols-2 mb-4">
-        <div class="flex  items-center">
-          <button class="bg-green-700 text-white rounded-lg py-3 px-2 text-sm">افزودن به سبد خرید</button>
-        </div>
-        <div class="grid grid-cols-1 ">
-          <div class="flex justify-center">
-            <div>
-              <div>
-                <span class="bg-rose-500 p-2 text-white rounded-lg">20%</span>
-                <span class="line-through text-sm ml-2">{{3935000 | number}}</span>
-              </div>
-              <span class="mt-2">{{3000000 | number}} تومان</span>
-            </div>
-          </div>
-        </div>
+    <div class="hidden lg:block">
+      <app-tab [tabs]="tabs"></app-tab>
+    </div>
+  </div>
 
+  <!-- show cort just in mobile mode -->
+  <div
+    class="sticky bottom-0 p-5 py-4 border-t flex items-center justify-between border-gray-100 bg-white shadow-2xl w-full lg:hidden"
+  >
+    @if(!notInCart()){
+    <button appButton (click)="onAddProductToCart()">افزودن به سبد خرید</button>
+    } @else {
+    <div class="flex flex-col relative">
+      <div
+        class="form-group relative py-4 px-2 rounded-xl bg-white border border-solid border-gray-100 shadow-md w-32 xs:w-64 sm:w-96"
+      >
+        <i
+          class="absolute cursor-pointer left-2 top-1/2 text-gray-500 -translate-y-1/2"
+          (click)="onMinusBtnClicked()"
+          [ngClass]="{
+            'icon-minus': remainingStock() !== 0,
+            'icon-trash': remainingStock() === productQuantity
+          }"
+        ></i>
+        <form [formGroup]="form">
+          <input
+            class="text-center border-none outline-none w-full"
+            formControlName="shoppingCardInput"
+          />
+        </form>
+        <i
+          class="icon-plus absolute cursor-pointer right-2 top-1/2 text-gray-500 -translate-y-1/2"
+          (click)="onPlusBtnClicked()"
+        ></i>
       </div>
+
+      @if(maxStockReached()){
+      <span
+        class="text-red-500 text-xs absolute -top-12 w-max bg-red-50 shadow-md rounded-lg p-3 after:content-[''] after:absolute after:top-full after:right-4 after:border-8 after:border-transparent after:border-t-red-50"
+      >
+        تعداد بیش از حد مجاز امکان پذیر نیست
+      </span>
+      }
+    </div>
+    }
+
+    <div class="price flex flex-col">
+      <div class="flex items-center gap-1 mb-2">
+        <span class="line-through text-md text-gray-500">۳,۹۳۵,۰۰۰</span>
+        <span class="bg-red-600 text-white py-1 px-3 rounded-xl text-sm"
+          >۲۰٪</span
+        >
+      </div>
+      <span class="text-gray-500 font-bold text-md sm:text-xl"
+        >۳,۰۰۰,۰۰۰ تومان</span
+      >
     </div>
   </div>
 </div>
