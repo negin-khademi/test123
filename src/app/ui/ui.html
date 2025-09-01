@@ -64,29 +64,8 @@
       <app-product-item />
       <app-product-item />
     </div>
-    <div class="mb-24 md:mb-2 bg-white w-full border border-solid border-gray-300 rounded-lg mt-4">
-      @for (section of sections; track $index) {
-      <div class="rounded-lg">
-        <button class="w-full flex justify-between items-center py-3 px-4 hover:bg-gray-100"
-          (click)="section.open = !section.open">
-          <span class="hover:text-lime-500 font-bold">{{ section.title }}</span>
-          <!-- Show + or - -->
-          <span class="text-xl font-bold hover:text-lime-500">
-            {{ section.open ? '−' : '+' }}
-          </span>
-        </button>
-        @if (!section.open ) {
-        @if (!$last) {
-        <hr class="text-gray-300 ">
-        }
-        }
-        @if (section.open) {
-        <p class="px-4 text-gray-600 text-sm leading-7 mt-2">{{section.content}}</p>
-        <hr class="text-gray-300 mt-4">
-        }
-      </div>
-      }
-    </div>
+    <app-accardion [accData]="sections" />
+
 
     <!-- show cort just in mobile mode -->
     <div class="fixed bottom-0 w-full py-4 z-10 bg-white md:hidden ">

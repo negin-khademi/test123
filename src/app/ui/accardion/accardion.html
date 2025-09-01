@@ -1,0 +1,24 @@
+<!-- accardion section  -->
+<div class="mb-24 md:mb-2 bg-white w-full border border-solid border-gray-300 rounded-lg mt-4 md:hidden">
+  @for (section of accData; track $index) {
+  <div class="rounded-lg">
+    <button class="w-full flex justify-between items-center py-3 px-4 hover:bg-gray-100 hover:text-lime-500"
+      (click)="section.open = !section.open">
+      <span class=" font-bold">{{ section.title }}</span>
+      <!-- Show + or - -->
+      <span class="text-xl font-bold ">
+        {{ section.open ? '−' : '+' }}
+      </span>
+    </button>
+    @if (!section.open ) {
+    @if (!$last) {
+    <hr class="text-gray-300 ">
+    }
+    }
+    @if (section.open) {
+    <p class="px-4 text-gray-600 text-sm leading-7 mt-2">{{section.content}}</p>
+    <hr class="text-gray-300 mt-4">
+    }
+  </div>
+  }
+</div>

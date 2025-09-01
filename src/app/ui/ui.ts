@@ -1,11 +1,12 @@
 import { CommonModule, DecimalPipe } from "@angular/common";
 
+import { Accardion } from "./accardion/accardion";
 import { Component } from "@angular/core";
 import { ProductItem } from "./product-item/product-item";
 
 @Component({
   selector: "app-ui",
-  imports: [DecimalPipe, ProductItem, CommonModule],
+  imports: [DecimalPipe, ProductItem, CommonModule, Accardion],
   templateUrl: "./ui.html",
   styleUrl: "./ui.scss",
 })
