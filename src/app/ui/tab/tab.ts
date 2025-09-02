@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-tab',
+  selector: "app-tab",
   imports: [],
-  templateUrl: './tab.html',
-  styleUrl: './tab.scss'
+  templateUrl: "./tab.html",
+  styleUrl: "./tab.scss",
 })
 export class Tab {
-
+  @Input({ required: true }) tabData!: any;
 }

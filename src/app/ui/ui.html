@@ -64,7 +64,12 @@
       <app-product-item />
       <app-product-item />
     </div>
-    <app-accardion [accData]="sections" />
+    <div class="md:hidden">
+      <app-accardion [accData]="sections" />
+    </div>
+    <div>
+      <app-tab [tabData]="sections" />
+    </div>
 
 
     <!-- show cort just in mobile mode -->

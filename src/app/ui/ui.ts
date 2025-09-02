@@ -3,10 +3,11 @@ import { CommonModule, DecimalPipe } from "@angular/common";
 import { Accardion } from "./accardion/accardion";
 import { Component } from "@angular/core";
 import { ProductItem } from "./product-item/product-item";
+import { Tab } from "./tab/tab";
 
 @Component({
   selector: "app-ui",
-  imports: [DecimalPipe, ProductItem, CommonModule, Accardion],
+  imports: [DecimalPipe, ProductItem, CommonModule, Accardion, Tab],
   templateUrl: "./ui.html",
   styleUrl: "./ui.scss",
 })
